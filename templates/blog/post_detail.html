@@ -20,7 +20,7 @@
 
       <h2 class="mb-1">{{ post.title }}</h2>
       <p class="text-muted mb-4">
-        <small>{{ post.author.username }} at {{ post.created_time }}</small>
+        <small>{{ post.owner.username }} at {{ post.created_time }}</small>
       </p>
       <p style="font-size: 1.1rem;">{{ post.content }}</p>
 
@@ -31,7 +31,7 @@
       {% for comment in post.comments.all %}
         <div class="card mb-3 border-light shadow-sm">
           <div class="card-header bg-white py-2">
-            <span class="font-weight-bold">{{ comment.author.username }}</span>
+            <span class="font-weight-bold">{{ comment.user.username }}</span>
             <span class="text-muted" style="font-size: 0.85em;">{{ comment.created_time }}</span>
           </div>
           <div class="card-body py-2">

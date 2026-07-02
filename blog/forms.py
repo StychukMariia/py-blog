@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Commentary
 
 
@@ -9,8 +10,9 @@ class CommentaryForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        if not self.initial.get("user").is_authenticated:
-            raise forms.ValidationError(
-                "Only authorized users can post comments"
-            )
+        user = self.initial.get("user")
+
+        if user is None or not user.is_authenticated:
+            raise ValidationError("You must be logged in to leave a comment.")
+
         return cleaned_data
